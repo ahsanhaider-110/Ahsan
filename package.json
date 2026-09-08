@@ -1,0 +1,12 @@
+{
+  "name": "portfolio-website",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "sass assets/scss/styles.scss assets/css/styles.css",
+    "watch": "sass --watch assets/scss/styles.scss assets/css/styles.css"
+  },
+  "devDependencies": {
+    "sass": "^1.77.8"
+  }
+}
