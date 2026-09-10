@@ -22,6 +22,20 @@ A responsive personal portfolio built with HTML, Bootstrap, Sass, and light Java
 
 Then visit http://localhost:8000
 
+## EmailJS setup
+
+The contact form uses EmailJS from the browser. In `assets/js/main.js`, replace
+the three placeholder values in `emailJsConfig` with the values from your
+EmailJS account:
+
+- `publicKey`: Account > API keys
+- `serviceId`: Email Services
+- `templateId`: Email Templates
+
+Your EmailJS template should use these variables: `{{name}}`, `{{email}}`,
+`{{subject}}`, and `{{message}}`. Set the template recipient to
+`ahsanhaider050@gmail.com`.
+
 ## GitHub push
 
 ```bash
