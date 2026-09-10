@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const contactForm = document.querySelector('#contactForm');
   const formStatus = document.querySelector('#formStatus');
   const submitButton = contactForm?.querySelector('button[type="submit"]');
+  const cooldownStorageKey = 'contactFormCooldownEnd';
+  const cooldownDuration = 30 * 60 * 1000;
 
   const emailJsConfig = {
     publicKey: 'tOYa1BVry_Kgk7jHt',
@@ -19,6 +21,41 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   if (contactForm) {
+    let cooldownInterval = null;
+    let isSubmitting = false;
+
+    const updateCooldownButton = (cooldownEnd) => {
+      const remaining = cooldownEnd - Date.now();
+
+      if (remaining <= 0) {
+        localStorage.removeItem(cooldownStorageKey);
+        clearInterval(cooldownInterval);
+        cooldownInterval = null;
+        submitButton.disabled = false;
+        submitButton.textContent = 'Send Message';
+        return false;
+      }
+
+      const totalSeconds = Math.ceil(remaining / 1000);
+      const minutes = Math.floor(totalSeconds / 60);
+      const seconds = totalSeconds % 60;
+      submitButton.disabled = true;
+      submitButton.textContent = `Send Message (${minutes}:${String(seconds).padStart(2, '0')})`;
+      return true;
+    };
+
+    const startCooldown = (cooldownEnd) => {
+      localStorage.setItem(cooldownStorageKey, String(cooldownEnd));
+      clearInterval(cooldownInterval);
+      updateCooldownButton(cooldownEnd);
+      cooldownInterval = setInterval(() => updateCooldownButton(cooldownEnd), 1000);
+    };
+
+    const savedCooldownEnd = Number(localStorage.getItem(cooldownStorageKey));
+    if (savedCooldownEnd && updateCooldownButton(savedCooldownEnd)) {
+      cooldownInterval = setInterval(() => updateCooldownButton(savedCooldownEnd), 1000);
+    }
+
     if (!window.emailjs) {
       formStatus.textContent = 'Email service is unavailable. Please try again later.';
       formStatus.classList.add('error');
@@ -34,12 +71,17 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
+      if (isSubmitting || localStorage.getItem(cooldownStorageKey)) {
+        return;
+      }
+
       if (Object.values(emailJsConfig).some((value) => value.startsWith('YOUR_'))) {
         formStatus.textContent = 'EmailJS is not configured yet.';
         formStatus.classList.add('error');
         return;
       }
 
+      isSubmitting = true;
       submitButton.disabled = true;
       submitButton.textContent = 'Sending...';
       formStatus.textContent = '';
@@ -54,14 +96,18 @@ document.addEventListener('DOMContentLoaded', () => {
         contactForm.reset();
         formStatus.textContent = 'Message sent successfully.';
         formStatus.classList.add('success');
+        startCooldown(Date.now() + cooldownDuration);
       } catch (error) {
         const errorMessage = error?.text || error?.message || 'Please try again.';
         formStatus.textContent = `Message could not be sent: ${errorMessage}`;
         formStatus.classList.add('error');
         console.error('EmailJS error:', error);
       } finally {
-        submitButton.disabled = false;
-        submitButton.textContent = 'Send Message';
+        isSubmitting = false;
+        if (!localStorage.getItem(cooldownStorageKey)) {
+          submitButton.disabled = false;
+          submitButton.textContent = 'Send Message';
+        }
       }
     });
   }
