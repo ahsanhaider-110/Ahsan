@@ -9,16 +9,22 @@ document.addEventListener('DOMContentLoaded', () => {
   const submitButton = contactForm?.querySelector('button[type="submit"]');
 
   const emailJsConfig = {
-    publicKey: 'YOUR_EMAILJS_PUBLIC_KEY',
-    serviceId: 'YOUR_EMAILJS_SERVICE_ID',
-    templateId: 'YOUR_EMAILJS_TEMPLATE_ID',
+    publicKey: 'tOYa1BVry_Kgk7jHt',
+    serviceId: 'service_l8qysym',
+    templateId: 'template_wgjqbtb',
   };
 
   if (yearNode) {
     yearNode.textContent = new Date().getFullYear();
   }
 
-  if (contactForm && window.emailjs) {
+  if (contactForm) {
+    if (!window.emailjs) {
+      formStatus.textContent = 'Email service is unavailable. Please try again later.';
+      formStatus.classList.add('error');
+      return;
+    }
+
     window.emailjs.init({ publicKey: emailJsConfig.publicKey });
 
     contactForm.addEventListener('submit', async (event) => {
@@ -49,7 +55,8 @@ document.addEventListener('DOMContentLoaded', () => {
         formStatus.textContent = 'Message sent successfully.';
         formStatus.classList.add('success');
       } catch (error) {
-        formStatus.textContent = 'Message could not be sent. Please try again.';
+        const errorMessage = error?.text || error?.message || 'Please try again.';
+        formStatus.textContent = `Message could not be sent: ${errorMessage}`;
         formStatus.classList.add('error');
         console.error('EmailJS error:', error);
       } finally {

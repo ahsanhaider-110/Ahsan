@@ -494,6 +494,18 @@ a {
   box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.08);
 }
 
+.form-status {
+  min-height: 1.5rem;
+  margin: 0.8rem 0 0;
+  font-weight: 600;
+}
+.form-status.success {
+  color: #15803d;
+}
+.form-status.error {
+  color: #b91c1c;
+}
+
 .site-footer {
   background: #1f2937;
   color: #ffffff;
