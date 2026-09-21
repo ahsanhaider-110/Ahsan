@@ -572,4 +572,73 @@ a {
   .timeline-item::after {
     left: -5px;
   }
+}
+/* Final polish overrides kept small so the existing component structure stays intact. */
+.section {
+  position: relative;
+}
+
+.section-header {
+  max-width: 700px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.hero {
+  min-height: min(850px, 100vh - 76px);
+}
+
+.profile-card {
+  padding: 0.8rem;
+  box-shadow: 0 28px 70px rgba(31, 41, 55, 0.14);
+  transform: rotate(2deg);
+  transition: transform 0.4s ease;
+}
+
+.profile-card:hover {
+  transform: rotate(0deg) translateY(-6px);
+}
+
+.profile-image-wrapper img {
+  height: 570px;
+  -o-object-position: center 34%;
+     object-position: center 34%;
+}
+
+.service-card:hover,
+.project-card:hover {
+  box-shadow: 0 28px 70px rgba(31, 41, 55, 0.14);
+  transform: translateY(-7px);
+}
+
+.project-card:hover img {
+  transform: scale(1.04);
+}
+
+.project-card img {
+  transition: transform 0.5s ease;
+}
+
+.project-content p {
+  min-height: 3.4rem;
+}
+
+@media (max-width: 767.98px) {
+  .profile-card {
+    transform: none;
+  }
+  .profile-image-wrapper img {
+    height: 440px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
 }/*# sourceMappingURL=styles.css.map */
