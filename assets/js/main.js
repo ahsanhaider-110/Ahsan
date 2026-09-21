@@ -114,7 +114,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (navToggle && navMenu) {
     navToggle.addEventListener('click', () => {
-      navMenu.classList.toggle('show');
+      const isOpen = navMenu.classList.toggle('show');
+      navToggle.setAttribute('aria-expanded', String(isOpen));
     });
   }
 
@@ -125,6 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (navMenu) {
         navMenu.classList.remove('show');
+        navToggle?.setAttribute('aria-expanded', 'false');
       }
     });
   });
