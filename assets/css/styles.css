@@ -455,38 +455,84 @@ a {
   padding: 1.8rem;
 }
 
-.contact-item {
+.collaboration-card {
+  background: linear-gradient(145deg, rgba(79, 70, 229, 0.1), #ffffff 58%);
+  border-top: 4px solid #4f46e5;
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.collaboration-card h3 {
+  margin: 0.35rem 0 0.8rem;
+  font-size: 1.8rem;
+  color: #1f2937;
+}
+
+.collaboration-kicker,
+.help-title {
+  color: #4f46e5;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.collaboration-heading p {
+  color: #6b7280;
+  margin: 0;
+}
+
+.collaboration-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 1.5rem 0;
+  padding: 0.55rem 0.8rem;
+  border-radius: 999px;
+  background: rgba(20, 184, 166, 0.1);
+  color: #1f2937;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+.collaboration-status i {
+  color: #14b8a6;
+}
+
+.help-area {
+  margin-bottom: 1.5rem;
+}
+
+.help-list {
+  display: grid;
+  gap: 0.7rem;
+  margin: 0.9rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+.help-list li {
   display: flex;
   align-items: flex-start;
-  gap: 1rem;
-  padding: 1rem 0;
-  border-bottom: 1px solid rgba(148, 163, 184, 0.28);
+  gap: 0.7rem;
+  color: #1f2937;
+  font-size: 0.92rem;
 }
-.contact-item:last-child {
-  border-bottom: none;
-}
-.contact-item i {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.8rem;
-  height: 2.8rem;
-  border-radius: 50%;
-  background: rgba(79, 70, 229, 0.1);
+.help-list li i {
+  margin-top: 0.35rem;
   color: #4f46e5;
-  font-size: 1.1rem;
+  font-size: 0.75rem;
 }
-.contact-item span {
-  display: block;
+
+.collaboration-cta {
+  width: 100%;
+  margin-top: auto;
+}
+
+.collaboration-note {
+  margin: 0.9rem 0 0;
   color: #6b7280;
   font-size: 0.8rem;
-  margin-bottom: 0.2rem;
-}
-.contact-item a,
-.contact-item p {
-  margin: 0;
-  color: #1f2937;
-  font-weight: 600;
+  text-align: center;
 }
 
 .contact-form label {
