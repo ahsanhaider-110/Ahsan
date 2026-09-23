@@ -101,9 +101,25 @@ a {
   font-weight: 600;
   color: #1f2937;
   position: relative;
+  transition: color 0.3s ease;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  right: 0.5rem;
+  bottom: 0.25rem;
+  left: 0.5rem;
+  height: 2px;
+  background: #4f46e5;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.3s ease;
 }
 .nav-link.active, .nav-link:hover {
   color: #4f46e5;
+}
+.nav-link.active::after, .nav-link:hover::after {
+  transform: scaleX(1);
 }
 
 .btn {
