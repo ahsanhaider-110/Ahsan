@@ -4,11 +4,44 @@ document.addEventListener('DOMContentLoaded', () => {
   const navLinks = document.querySelectorAll('.nav-link');
   const yearNode = document.querySelector('#year');
   const revealItems = document.querySelectorAll('.reveal');
+  const whatCanDoButton = document.querySelector('#whatCanDoButton');
+  const servicesModal = document.querySelector('#servicesModal');
+  const modalCloseButtons = servicesModal?.querySelectorAll('[data-modal-close]');
   const contactForm = document.querySelector('#contactForm');
   const formStatus = document.querySelector('#formStatus');
   const submitButton = contactForm?.querySelector('button[type="submit"]');
   const cooldownStorageKey = 'contactFormCooldownEnd';
   const cooldownDuration = 30 * 60 * 1000;
+
+  if (whatCanDoButton && servicesModal) {
+    let closeTimeout;
+
+    const closeServicesModal = () => {
+      servicesModal.classList.remove('is-open');
+      servicesModal.setAttribute('aria-hidden', 'true');
+      clearTimeout(closeTimeout);
+      closeTimeout = setTimeout(() => {
+        servicesModal.hidden = true;
+      }, 300);
+    };
+
+    whatCanDoButton.addEventListener('click', () => {
+      clearTimeout(closeTimeout);
+      servicesModal.hidden = false;
+      servicesModal.setAttribute('aria-hidden', 'false');
+      requestAnimationFrame(() => servicesModal.classList.add('is-open'));
+    });
+
+    modalCloseButtons?.forEach((button) => {
+      button.addEventListener('click', closeServicesModal);
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && !servicesModal.hidden) {
+        closeServicesModal();
+      }
+    });
+  }
 
   const emailJsConfig = {
     publicKey: 'tOYa1BVry_Kgk7jHt',

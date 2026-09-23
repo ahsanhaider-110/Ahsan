@@ -391,7 +391,7 @@
                                 </ul>
                             </div>
 
-                            <a class="btn btn-primary collaboration-cta" href="#contactForm">Let's Connect</a>
+                            <button class="btn btn-primary collaboration-cta" id="whatCanDoButton" type="button" aria-controls="servicesModal" aria-haspopup="dialog">What I Can Do</button>
                             <p class="collaboration-note">Available for freelance &amp; junior frontend opportunities.</p>
                         </div>
                     </div>
@@ -426,6 +426,36 @@
             </div>
         </section>
     </main>
+
+    <div class="service-modal" id="servicesModal" hidden aria-hidden="true">
+        <div class="service-modal-backdrop" data-modal-close></div>
+        <section class="service-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="servicesModalTitle">
+            <button class="service-modal-close" type="button" aria-label="Close What I Can Do dialog" data-modal-close>
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <p class="eyebrow">Capabilities</p>
+            <h2 id="servicesModalTitle">What I Can Do</h2>
+            <p class="service-modal-intro">I build responsive, modern, and user-friendly frontend experiences that help ideas feel clear and engaging.</p>
+
+            <div class="service-list">
+                <button class="service-item" type="button">
+                    <i class="fa-solid fa-display"></i>
+                    <span>Responsive Websites</span>
+                    <i class="fa-solid fa-arrow-right service-item-arrow"></i>
+                </button>
+                <button class="service-item" type="button">
+                    <i class="fa-solid fa-pen-ruler"></i>
+                    <span>Modern UI Development</span>
+                    <i class="fa-solid fa-arrow-right service-item-arrow"></i>
+                </button>
+                <button class="service-item" type="button">
+                    <i class="fa-brands fa-angular"></i>
+                    <span>Angular Frontend Development</span>
+                    <i class="fa-solid fa-arrow-right service-item-arrow"></i>
+                </button>
+            </div>
+        </section>
+    </div>
 
     <footer class="site-footer">
         <div class="container">

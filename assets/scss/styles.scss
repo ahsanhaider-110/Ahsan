@@ -603,6 +603,133 @@ a {
     text-align: center;
 }
 
+.service-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1100;
+    display: grid;
+    place-items: center;
+    padding: 1.5rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+
+    &[hidden] {
+        display: none;
+    }
+
+    &.is-open {
+        opacity: 1;
+        visibility: visible;
+
+        .service-modal-dialog {
+            transform: translateY(0) scale(1);
+        }
+    }
+}
+
+.service-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(31, 41, 55, 0.55);
+}
+
+.service-modal-dialog {
+    position: relative;
+    width: min(100%, 560px);
+    padding: 2.2rem;
+    border: 1px solid $border;
+    border-radius: 22px;
+    background: $white;
+    box-shadow: 0 28px 70px rgba(31, 41, 55, 0.2);
+    transform: translateY(18px) scale(0.98);
+    transition: transform 0.3s ease;
+
+    .eyebrow {
+        margin-bottom: 0.6rem;
+        color: $primary;
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+    }
+
+    h2 {
+        @include heading-style;
+        margin: 0 2rem 0.8rem 0;
+        font-size: clamp(1.8rem, 4vw, 2.5rem);
+    }
+}
+
+.service-modal-close {
+    @include flex-center;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 2.4rem;
+    height: 2.4rem;
+    border: 1px solid $border;
+    border-radius: 50%;
+    background: $secondary;
+    color: $text;
+    transition: all 0.3s ease;
+
+    &:hover {
+        background: $primary;
+        color: $white;
+        transform: rotate(8deg);
+    }
+}
+
+.service-modal-intro {
+    margin-bottom: 1.5rem;
+    color: $text-soft;
+}
+
+.service-list {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.service-item {
+    display: grid;
+    grid-template-columns: 1.5rem 1fr auto;
+    align-items: center;
+    gap: 0.8rem;
+    width: 100%;
+    padding: 0.95rem 1rem;
+    border: 1px solid $border;
+    border-radius: 14px;
+    background: $white;
+    color: $text;
+    font: inherit;
+    font-weight: 600;
+    text-align: left;
+    transition: all 0.3s ease;
+
+    > i:first-child {
+        color: $primary;
+        text-align: center;
+    }
+
+    &:hover {
+        border-color: rgba(79, 70, 229, 0.45);
+        background: rgba(79, 70, 229, 0.05);
+        transform: translateX(4px);
+    }
+
+    .service-item-arrow {
+        color: $text-soft;
+        font-size: 0.8rem;
+        transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    &:hover .service-item-arrow {
+        color: $primary;
+        transform: translateX(3px);
+    }
+}
+
 .contact-form {
     label {
         display: block;
