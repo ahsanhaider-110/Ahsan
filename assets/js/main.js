@@ -146,7 +146,21 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-    capabilityContact?.addEventListener('click', () => closeServicesModal(false));
+    capabilityContact?.addEventListener('click', (event) => {
+      const contactTarget = document.querySelector(capabilityContact.hash);
+      if (!contactTarget) {
+        console.error('The capability contact link points to a missing page section.');
+        return;
+      }
+
+      event.preventDefault();
+      closeServicesModal(false);
+      window.history.pushState(null, '', capabilityContact.hash);
+      window.scrollTo({
+        top: contactTarget.getBoundingClientRect().top + window.scrollY,
+        behavior: 'instant',
+      });
+    });
 
     servicesModal.addEventListener('keydown', (event) => {
       if (event.key === 'Escape' && !servicesModal.hidden) {
@@ -522,15 +536,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  navLinks.forEach((link) => {
+  navMenu?.querySelectorAll('a').forEach((link) => {
     link.addEventListener('click', () => {
-      navLinks.forEach((item) => item.classList.remove('active'));
-      link.classList.add('active');
-
-      if (navMenu) {
-        navMenu.classList.remove('show');
-        navToggle?.setAttribute('aria-expanded', 'false');
+      if (link.matches('.nav-link')) {
+        navLinks.forEach((item) => item.classList.remove('active'));
+        link.classList.add('active');
       }
+
+      navMenu.classList.remove('show');
+      navToggle?.setAttribute('aria-expanded', 'false');
     });
   });
 
@@ -553,6 +567,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const typedText = document.querySelector('.typed-text');
   if (typedText) {
     const textList = ['Web Developer', 'UI Designer', 'Freelancer'];
+    if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) {
+      typedText.textContent = textList[0];
+      return;
+    }
+
     let index = 0;
     let charIndex = 0;
 
