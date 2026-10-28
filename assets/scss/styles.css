@@ -77,6 +77,21 @@ a {
 
 .navbar.navbar-light .navbar-toggler {
   border-color: #333333;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.navbar.navbar-light .navbar-toggler:hover {
+  border-color: #ff7a1a;
+}
+.navbar.navbar-light .navbar-toggler:focus {
+  box-shadow: 0 0 0 0.25rem rgba(255, 122, 26, 0.25);
+}
+.navbar.navbar-light .navbar-toggler:focus-visible {
+  outline: 2px solid #ff923d;
+  outline-offset: 3px;
+}
+.navbar.navbar-light .navbar-toggler:active {
+  border-color: #e85f00;
+  box-shadow: inset 0 0 0 1px rgba(255, 122, 26, 0.35);
 }
 
 .navbar-toggler-icon {
@@ -159,9 +174,30 @@ a {
   font-weight: 600;
   transition: all 0.3s ease;
   text-decoration: none;
+  --bs-btn-focus-shadow-rgb: 255, 122, 26;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.18);
+  -webkit-tap-highlight-color: rgba(255, 122, 26, 0.18);
+}
+.btn:focus-visible {
+  outline: 2px solid #ff923d;
+  outline-offset: 3px;
+  box-shadow: 0 0 0 0.25rem rgba(255, 122, 26, 0.3);
 }
 
 .btn-primary {
+  --bs-btn-color: #111111;
+  --bs-btn-bg: #ff7a1a;
+  --bs-btn-border-color: #ff7a1a;
+  --bs-btn-hover-color: #111111;
+  --bs-btn-hover-bg: #ff923d;
+  --bs-btn-hover-border-color: #ff923d;
+  --bs-btn-focus-shadow-rgb: 255, 122, 26;
+  --bs-btn-active-color: #111111;
+  --bs-btn-active-bg: #e85f00;
+  --bs-btn-active-border-color: #e85f00;
+  --bs-btn-disabled-color: #8f8f8f;
+  --bs-btn-disabled-bg: #383838;
+  --bs-btn-disabled-border-color: #383838;
   background: linear-gradient(135deg, #ff7a1a, #e85f00);
   color: #111111;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.28);
@@ -175,15 +211,45 @@ a {
   outline: 2px solid #ff923d;
   outline-offset: 3px;
 }
+.btn-primary:active {
+  transform: translateY(0);
+  background: #e85f00;
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.18);
+}
 
 .btn-secondary {
+  --bs-btn-color: #f5f5f5;
+  --bs-btn-bg: #181818;
+  --bs-btn-border-color: #333333;
+  --bs-btn-hover-color: #f5f5f5;
+  --bs-btn-hover-bg: #2b211b;
+  --bs-btn-hover-border-color: #ff7a1a;
+  --bs-btn-focus-shadow-rgb: 255, 122, 26;
+  --bs-btn-active-color: #f5f5f5;
+  --bs-btn-active-bg: #241c17;
+  --bs-btn-active-border-color: #e85f00;
+  --bs-btn-disabled-color: #777777;
+  --bs-btn-disabled-bg: #202020;
+  --bs-btn-disabled-border-color: #333333;
   background: #181818;
   color: #f5f5f5;
   border: 1px solid #333333;
 }
 .btn-secondary:hover {
-  background: #0e0e0e;
+  background: #2b211b;
   color: #f5f5f5;
+  border-color: rgba(255, 122, 26, 0.65);
+  box-shadow: 0 0 0 3px rgba(255, 122, 26, 0.08);
+}
+.btn-secondary:active {
+  background: #241c17;
+  border-color: #e85f00;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.25);
+}
+
+button:active,
+.btn:active {
+  filter: brightness(0.92);
 }
 
 .hero {

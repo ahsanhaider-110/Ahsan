@@ -116,6 +116,25 @@ a {
 
 .navbar.navbar-light .navbar-toggler {
     border-color: $border;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+
+    &:hover {
+        border-color: $primary;
+    }
+
+    &:focus {
+        box-shadow: 0 0 0 0.25rem rgba(255, 122, 26, 0.25);
+    }
+
+    &:focus-visible {
+        outline: 2px solid $accent;
+        outline-offset: 3px;
+    }
+
+    &:active {
+        border-color: $primary-dark;
+        box-shadow: inset 0 0 0 1px rgba(255, 122, 26, 0.35);
+    }
 }
 
 .navbar-toggler-icon {
@@ -202,9 +221,31 @@ a {
 
 .btn {
     @include button-base;
+    --bs-btn-focus-shadow-rgb: 255, 122, 26;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.18);
+    -webkit-tap-highlight-color: rgba(255, 122, 26, 0.18);
+
+    &:focus-visible {
+        outline: 2px solid $accent;
+        outline-offset: 3px;
+        box-shadow: 0 0 0 0.25rem rgba(255, 122, 26, 0.3);
+    }
 }
 
 .btn-primary {
+    --bs-btn-color: #111111;
+    --bs-btn-bg: #{$primary};
+    --bs-btn-border-color: #{$primary};
+    --bs-btn-hover-color: #111111;
+    --bs-btn-hover-bg: #{$accent};
+    --bs-btn-hover-border-color: #{$accent};
+    --bs-btn-focus-shadow-rgb: 255, 122, 26;
+    --bs-btn-active-color: #111111;
+    --bs-btn-active-bg: #{$primary-dark};
+    --bs-btn-active-border-color: #{$primary-dark};
+    --bs-btn-disabled-color: #8f8f8f;
+    --bs-btn-disabled-bg: #383838;
+    --bs-btn-disabled-border-color: #383838;
     background: linear-gradient(135deg, $primary, $primary-dark);
     color: #111111;
     box-shadow: $shadow-soft;
@@ -219,17 +260,49 @@ a {
         outline: 2px solid $accent;
         outline-offset: 3px;
     }
+
+    &:active {
+        transform: translateY(0);
+        background: $primary-dark;
+        box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.18);
+    }
 }
 
 .btn-secondary {
+    --bs-btn-color: #{$text};
+    --bs-btn-bg: #{$secondary};
+    --bs-btn-border-color: #{$border};
+    --bs-btn-hover-color: #{$text};
+    --bs-btn-hover-bg: #2b211b;
+    --bs-btn-hover-border-color: #{$primary};
+    --bs-btn-focus-shadow-rgb: 255, 122, 26;
+    --bs-btn-active-color: #{$text};
+    --bs-btn-active-bg: #241c17;
+    --bs-btn-active-border-color: #{$primary-dark};
+    --bs-btn-disabled-color: #777777;
+    --bs-btn-disabled-bg: #202020;
+    --bs-btn-disabled-border-color: #333333;
     background: $secondary;
     color: $text;
     border: 1px solid $border;
 
     &:hover {
-        background: darken($secondary, 4%);
+        background: #2b211b;
         color: $text;
+        border-color: rgba(255, 122, 26, 0.65);
+        box-shadow: 0 0 0 3px rgba(255, 122, 26, 0.08);
     }
+
+    &:active {
+        background: #241c17;
+        border-color: $primary-dark;
+        box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.25);
+    }
+}
+
+button:active,
+.btn:active {
+    filter: brightness(0.92);
 }
 
 .hero {
